@@ -1,8 +1,16 @@
+import com.github.singlerr.apringframework.CheckStyleUtil
+
 plugins{
     java
     checkstyle
+    `maven-publish`
 
     id("com.github.spotbugs")
+}
+
+java{
+    withSourcesJar()
+    withJavadocJar()
 }
 
 repositories{
@@ -10,10 +18,19 @@ repositories{
 }
 
 checkstyle{
-    config = resources.text.fromString(com.github.singlerr.apringframework.CheckStyleUtil.getCheckstyleConfig("/checkstyle.xml"))
+    config = resources.text.fromString(CheckStyleUtil.getCheckstyleConfig("/checkstyle.xml"))
     maxWarnings = 10
 }
 
 tasks.withType<JavaCompile>{
 
+}
+
+
+publishing{
+    publications{
+        withType<MavenPublication>{
+
+        }
+    }
 }
